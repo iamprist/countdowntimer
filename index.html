@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Countdown Timer - Focus & Study</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Settings Button -->
+    <button class="settings-btn" id="settingsBtn">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M12 1v6m0 6v6m5.196-14.196l-4.243 4.243m0 5.656l-4.243 4.243m14.196-5.196l-6 0m-6 0l-6 0m14.196 5.196l-4.243-4.243m0-5.656l-4.243-4.243"></path>
+        </svg>
+    </button>
+
+    <!-- Fullscreen Button -->
+    <button class="fullscreen-btn" id="fullscreenBtn" title="Toggle Fullscreen">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        </svg>
+    </button>
+
+    <!-- Settings Panel (Hidden by default) -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="settings-content">
+            <button class="close-btn" id="closeBtn">&times;</button>
+            
+            <h2>Settings</h2>
+            
+            <!-- Mode Selection -->
+            <div class="control-group">
+                <label>Timer Mode:</label>
+                <div class="mode-buttons">
+                    <button id="modeCountdown" class="mode-btn" data-mode="countdown">Countdown</button>
+                    <button id="modeCountup" class="mode-btn" data-mode="countup">Count Up</button>
+                    <button id="modeStopwatch" class="mode-btn active" data-mode="stopwatch">Stopwatch</button>
+                    <button id="modeClock" class="mode-btn" data-mode="clock">Clock</button>
+                </div>
+            </div>
+
+            <!-- Time Format Toggle -->
+            <div class="control-group">
+                <label>Time Format:</label>
+                <div class="toggle-buttons">
+                    <button id="format24" class="format-btn active">24 Hour</button>
+                    <button id="format12" class="format-btn">12 Hour</button>
+                </div>
+            </div>
+
+            <!-- Background Color Selection -->
+            <div class="control-group">
+                <label>Background Color:</label>
+                <div class="color-buttons">
+                    <button class="color-btn active" data-color="black" style="background-color: #1a1a1a;"></button>
+                    <button class="color-btn" data-color="pink" style="background-color: #ff69b4;"></button>
+                    <button class="color-btn" data-color="white" style="background-color: #ffffff; border: 2px solid #ccc;"></button>
+                    <button class="color-btn" data-color="blue" style="background-color: #4169e1;"></button>
+                </div>
+            </div>
+
+            <!-- Time Input (for countdown/countup modes) -->
+            <div class="control-group" id="timeInputGroup">
+                <label>Set Time:</label>
+                <div class="time-input">
+                    <input type="number" id="hours" min="0" max="23" placeholder="00" value="0">
+                    <span>:</span>
+                    <input type="number" id="minutes" min="0" max="59" placeholder="00" value="25">
+                    <span>:</span>
+                    <input type="number" id="seconds" min="0" max="59" placeholder="00" value="0">
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="control-group" id="actionButtonsGroup">
+                <button id="startBtn" class="action-btn start-btn">Start</button>
+                <button id="pauseBtn" class="action-btn pause-btn" disabled>Pause</button>
+                <button id="resetBtn" class="action-btn reset-btn">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flip Timer Display -->
+    <div class="container">
+        <div class="mode-label" id="modeLabel">COUNTDOWN</div>
+        <div class="timer-display">
+            <!-- Hours -->
+            <div class="time-unit">
+                <div class="digits-group">
+                    <div class="flip-container" id="hours-tens">
+                        <div class="flip-card">
+                            <div class="flip-card-top">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-bottom">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-flip">
+                                <span>0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-container" id="hours-ones">
+                        <div class="flip-card">
+                            <div class="flip-card-top">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-bottom">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-flip">
+                                <span>0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="time-label">HOURS</div>
+            </div>
+
+            <!-- Minutes -->
+            <div class="time-unit">
+                <div class="digits-group">
+                    <div class="flip-container" id="minutes-tens">
+                        <div class="flip-card">
+                            <div class="flip-card-top">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-bottom">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-flip">
+                                <span>0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-container" id="minutes-ones">
+                        <div class="flip-card">
+                            <div class="flip-card-top">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-bottom">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-flip">
+                                <span>0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="time-label">MINUTES</div>
+            </div>
+
+            <!-- Seconds -->
+            <div class="time-unit">
+                <div class="digits-group">
+                    <div class="flip-container" id="seconds-tens">
+                        <div class="flip-card">
+                            <div class="flip-card-top">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-bottom">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-flip">
+                                <span>0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-container" id="seconds-ones">
+                        <div class="flip-card">
+                            <div class="flip-card-top">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-bottom">
+                                <span>0</span>
+                            </div>
+                            <div class="flip-card-flip">
+                                <span>0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="time-label">SECONDS</div>
+            </div>
+
+            <!-- AM/PM Period Display -->
+            <div class="period-display" id="period" style="display: none;">
+                <span>AM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Focus Timer © 2025 by Pretty| Press <kbd>SPACE</kbd> to pause/resume</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
