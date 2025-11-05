@@ -1,4 +1,4 @@
-# ⏱️ Flip Clock Timer
+#  Flip Clock Timer
 
 A beautiful, customizable flip clock timer with realistic flip animations and multiple modes for productivity and focus.
 
