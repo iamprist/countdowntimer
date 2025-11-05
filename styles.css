@@ -527,8 +527,8 @@ body.white .time-input span {
     border-radius: 15px 15px 4px 4px;
     border-bottom: 2px solid rgba(0, 0, 0, 0.9);
     transform-origin: bottom center;
-    transform-style: preserve-3d;
-    backface-visibility: visible;
+    transform-style: flat;
+    backface-visibility: hidden;
     z-index: 15;
     opacity: 0;
     pointer-events: none;
@@ -540,6 +540,7 @@ body.white .time-input span {
 .flip-container.flipping .flip-card-flip {
     opacity: 1;
     z-index: 15;
+    backface-visibility: hidden;
 }
 
 /* After 90 degrees, change background to show it's revealing the new number */
@@ -654,23 +655,14 @@ body.blue .flip-card-bottom {
     0% {
         transform: rotateX(-180deg);
     }
-    15% {
-        transform: rotateX(-155deg);
-    }
     30% {
-        transform: rotateX(-185deg);
+        transform: rotateX(-175deg);
     }
-    45% {
-        transform: rotateX(-172deg);
-    }
-    60% {
-        transform: rotateX(-183deg);
-    }
-    75% {
-        transform: rotateX(-177deg);
-    }
-    90% {
+    50% {
         transform: rotateX(-181deg);
+    }
+    70% {
+        transform: rotateX(-179deg);
     }
     100% {
         transform: rotateX(-180deg);
@@ -679,7 +671,7 @@ body.blue .flip-card-bottom {
 
 .flip-container.flipping .flip-card-flip {
     animation: flipDown 0.6s cubic-bezier(0.4, 0.0, 0.2, 1) forwards,
-               bounceSettle 0.5s 0.6s cubic-bezier(0.35, 1.8, 0.5, 1) forwards,
+               bounceSettle 0.4s 0.6s ease-out forwards,
                flipCardBg 0.6s step-end forwards;
 }
 

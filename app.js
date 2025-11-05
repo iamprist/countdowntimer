@@ -62,12 +62,12 @@ function updateFlipCard(container, value) {
         // Start flipping animation - flip card will cover the top and flip down
         container.classList.add('flipping');
         
-        // After flip completes, update BOTH top and bottom to NEW number
+        // Update BOTH top and bottom to NEW number right after flip animation completes
         setTimeout(() => {
             topSpan.textContent = value;
             bottomSpan.textContent = value;
             container.classList.remove('flipping');
-        }, 1100); // 600ms flip + 500ms bounce
+        }, 610); // Right after 600ms flip completes
     }
 }
 
